@@ -1,0 +1,61 @@
+Windows Registry Editor Version 5.00
+
+; =============================================================================
+; RESTORE DEFAULT SHUTDOWN SETTINGS
+; =============================================================================
+; This registry file restores Windows default shutdown behavior.
+;
+; To apply: Double-click this file and confirm the prompts
+; =============================================================================
+
+; -----------------------------------------------------------------------------
+; USER-LEVEL SETTINGS (HKEY_CURRENT_USER) - Restore defaults
+; -----------------------------------------------------------------------------
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+; AutoEndTasks: Disable auto-end (show "app preventing shutdown" dialog)
+"AutoEndTasks"="0"
+
+; WaitToKillAppTimeout: Default 5 seconds
+"WaitToKillAppTimeout"="5000"
+
+; HungAppTimeout: Default 5 seconds
+"HungAppTimeout"="5000"
+
+; LowLevelHooksTimeout: Default
+"LowLevelHooksTimeout"="5000"
+
+; -----------------------------------------------------------------------------
+; SYSTEM-LEVEL SETTINGS (HKEY_LOCAL_MACHINE) - Restore defaults
+; -----------------------------------------------------------------------------
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
+; WaitToKillServiceTimeout: Default 5 seconds
+"WaitToKillServiceTimeout"="5000"
+
+; -----------------------------------------------------------------------------
+; SHUTDOWN BEHAVIOR POLICIES - Remove custom settings
+; -----------------------------------------------------------------------------
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"ShutdownReasonOn"=-
+"ShutdownReasonUI"=-
+"VerboseStatus"=-
+
+; -----------------------------------------------------------------------------
+; FAST STARTUP - Re-enable (Windows default)
+; -----------------------------------------------------------------------------
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power]
+"HiberbootEnabled"=dword:00000001
+
+; -----------------------------------------------------------------------------
+; WINDOWS ERROR REPORTING - Re-enable
+; -----------------------------------------------------------------------------
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting]
+"Disabled"=dword:00000000
+
+; =============================================================================
+; END OF RESTORE DEFAULT SETTINGS
+; =============================================================================

@@ -1,0 +1,94 @@
+Windows Registry Editor Version 5.00
+
+; =============================================================================
+; INSTANT REBOOT - Registry Optimizations
+; =============================================================================
+; This registry file configures Windows 11 for instant reboots with no delays.
+;
+; WARNING: This will force-close applications without saving!
+;          Make sure to save your work before rebooting.
+;
+; To apply: Double-click this file and confirm the prompts
+; To undo:  Run restore_default_shutdown.reg
+; =============================================================================
+
+; -----------------------------------------------------------------------------
+; USER-LEVEL SETTINGS (HKEY_CURRENT_USER)
+; -----------------------------------------------------------------------------
+
+[HKEY_CURRENT_USER\Control Panel\Desktop]
+; AutoEndTasks: Force close apps without "This app is preventing shutdown" dialog
+; Value: "1" = enabled, "0" = disabled (default)
+"AutoEndTasks"="1"
+
+; WaitToKillAppTimeout: Milliseconds to wait for apps to close before force-killing
+; Default: 5000 (5 seconds), Setting: 1000 (1 second)
+"WaitToKillAppTimeout"="1000"
+
+; HungAppTimeout: Milliseconds before an app is considered "hung"
+; Default: 5000 (5 seconds), Setting: 1000 (1 second)
+"HungAppTimeout"="1000"
+
+; LowLevelHooksTimeout: Timeout for low-level hooks during shutdown
+; Setting lower value to speed up shutdown
+"LowLevelHooksTimeout"="1000"
+
+; -----------------------------------------------------------------------------
+; SYSTEM-LEVEL SETTINGS (HKEY_LOCAL_MACHINE)
+; -----------------------------------------------------------------------------
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
+; WaitToKillServiceTimeout: Milliseconds to wait for services to stop
+; Default: 5000 (5 seconds), Setting: 1000 (1 second)
+"WaitToKillServiceTimeout"="1000"
+
+; -----------------------------------------------------------------------------
+; SHUTDOWN BEHAVIOR POLICIES
+; -----------------------------------------------------------------------------
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+; Disable shutdown event tracker (no reason prompts)
+"ShutdownReasonOn"=dword:00000000
+"ShutdownReasonUI"=dword:00000000
+
+; Disable verbose status messages during shutdown
+"VerboseStatus"=dword:00000000
+
+; -----------------------------------------------------------------------------
+; EXPLORER SHELL SETTINGS
+; -----------------------------------------------------------------------------
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+; Disable "Programs still running" warning
+"AlwaysUnloadDLL"=dword:00000001
+
+; -----------------------------------------------------------------------------
+; FAST STARTUP / HYBRID SHUTDOWN (Disable for cleaner restarts)
+; -----------------------------------------------------------------------------
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power]
+; Disable hybrid shutdown/fast startup for true restarts
+; This ensures a full restart rather than hybrid shutdown
+"HiberbootEnabled"=dword:00000000
+
+; -----------------------------------------------------------------------------
+; WINDOWS ERROR REPORTING (Disable to prevent delays)
+; -----------------------------------------------------------------------------
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting]
+; Disable error reporting that can delay shutdown
+"Disabled"=dword:00000001
+
+; -----------------------------------------------------------------------------
+; POWER SETTINGS - Make power button trigger shutdown
+; -----------------------------------------------------------------------------
+
+; Note: Power button behavior is typically set via powercfg, not registry
+; These keys may help in some scenarios
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\PowerCfg]
+; Power button settings are stored per power plan in HKLM\SYSTEM\CurrentControlSet\Control\Power
+
+; =============================================================================
+; END OF INSTANT REBOOT OPTIMIZATIONS
+; =============================================================================

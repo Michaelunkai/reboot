@@ -220,3 +220,5 @@ MIT License - Use at your own risk.
 
 Based on research into Windows shutdown internals and the `NtShutdownSystem` API.
 Inspired by the need for instant reboots without the Windows "Restarting" ceremony.
+
+<!-- gitit-sync: 2026-01-15 15:18:07.313325 -->

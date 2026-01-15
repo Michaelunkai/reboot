@@ -150,3 +150,5 @@ You're probably using the original method. Switch to Nuclear:
 ## License
 
 MIT License - Use at your own risk.
+
+<!-- gitit-sync: 2026-01-15 15:24:52.501215 -->
